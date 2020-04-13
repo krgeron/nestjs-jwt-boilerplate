@@ -8,7 +8,7 @@ import { AppClient } from './models/app.client.entity';
   imports: [AuthModule, RegistrationModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'db-dev.aspire.int.asurion.com',
+      host: 'xx.x.x.x.com',
       port: 3306,
       username: 'dbadmin',
       password: 'Password2019!',

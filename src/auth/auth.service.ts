@@ -22,7 +22,7 @@ export class AuthService {
         });
 
         if (exists) {
-            const accessToken = jwt.sign(payload, secret, { expiresIn: 3600 });
+            const accessToken = jwt.sign(payload, secret, { expiresIn: 10 });
             return accessToken;
         } else {
             throw new UnauthorizedException();
@@ -37,10 +37,14 @@ export class AuthService {
             console.log('here');
         });
 
-        if(exists) {
-            const json = await jwt.verify(token, exists.secret);
-            console.log(json);
-            return json;
+        if (exists) {
+            try {
+                const json = await jwt.verify(token, exists.secret);
+                console.log(json);
+                return json;
+            } catch (e) {
+                throw new UnauthorizedException("Token is expired");
+            }
         } else {
             throw new UnauthorizedException();
         }
